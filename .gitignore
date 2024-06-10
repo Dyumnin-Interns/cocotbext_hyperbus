@@ -1,0 +1,6 @@
+# Ignore build folder
+/build
+
+/dist
+
+/cocotbext_hyperbus.egg-info
