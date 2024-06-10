@@ -34,6 +34,10 @@ jobs:
       - name: Build package
         run: python -m build
 
+      - name: Get commit message
+        id: commit_message
+        run: echo "::set-output name=message::$(git log --format=%B -n 1 ${{ github.sha }})"
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -41,9 +45,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.sha }}
-          release_name: Release based on commit message: ${{ github.event.head_commit.message }}
-          body: |
-            Release created automatically based on commit message.
+          release_name: ${{ steps.commit_message.outputs.message }}
+          body: ${{ steps.commit_message.outputs.message }}
 
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
