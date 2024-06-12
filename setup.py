@@ -1,15 +1,17 @@
 # setup.py
 from setuptools import setup, find_packages
 
-__version__="0.1.5"
+__version__="0.1.6"
 setup(
     name='cocotbext_hyperbus',
     version=__version__,
     description='A cocotb extension for HyperBus controllers',
+    keywords=['cocotb', 'HyperBus'],
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     author='Meet Sangani',
-    author_email='your.email@example.com',
+    author_email='meet.sangani@outlook.com',
+    license = 'MIT',
     url='https://github.com/meeeeet/cocotbext_hyperbus',
     packages=find_packages(),
     install_requires=[
@@ -17,13 +19,11 @@ setup(
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
-        'Intended Audience :: Developers',
+        'Framework :: cocotb',
         'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3.10',
-        'Topic :: Software Development :: Libraries',
+        'Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)',
     ],
     python_requires='>=3.8',
 )

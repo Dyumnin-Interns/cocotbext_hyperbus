@@ -92,6 +92,7 @@ class HyperBusController(HyperBus_FSM):
         print("--------------------------------------------------")    
         # self.log(f'$$$$$$$$ o_mem_rdata {self.rx_data(self.o_mem_rdata,32)}')
         await Timer(20,'ns')
+        return self.o_mem_rdata
 
     async def clk_cycle(self,dut):
         while True:
@@ -142,9 +143,7 @@ class HyperBusController(HyperBus_FSM):
             self.monitor_dq(dut)
             self.i_rwds=dut.rwds.value
             dut.i_clk.value=self.o_mem_ready
-            dut.ms.value=self.rwds_valid()
 
-            dut.rdata.value=self.o_mem_rdata
             
             await Timer(1,'ns')
 
