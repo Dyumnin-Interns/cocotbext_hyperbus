@@ -14,8 +14,9 @@ on:
       - main
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
+    if: startsWith(github.event.head_commit.message, 'v')
 
     steps:
       - name: Checkout code

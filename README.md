@@ -2,8 +2,6 @@
 
 [![PyPI version](https://badge.fury.io/py/cocotbext-hyperbus.svg)](https://badge.fury.io/py/cocotbext-hyperbus)
 
-GitHub repository: https://github.com/meeeeet/cocotbext_hyperbus
-
 ## Installation
 
 Installation from pip (release version, stable):
