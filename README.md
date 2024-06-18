@@ -6,7 +6,7 @@
 
 Installation from pip (release version, stable):
 
-    pip install cocotbext-uart
+    pip install cocotbext-hyperbus
 
 Installation for active development:
 
