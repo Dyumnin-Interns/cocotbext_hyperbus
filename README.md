@@ -17,6 +17,22 @@ Installation for active development:
 
 See the `tests` directory for complete testbenches using these modules.
 
+NOTE: Change the following parameter from the RTL code of Infineon's HyperRAM else the cocotb will have to wait for long duration and simulation may gets crash.
+
+    // tdevice values: values for internal delays
+    // power-on reset
+    specparam tdevice_VCS    = 150;
+    // Deep Power Down to Idle wake up time
+    specparam tdevice_DPD    = 150;
+    // Exit Event from Deep Power Down
+    specparam tdevice_DPDCSL = 20;
+    // Warm HW reset
+    specparam tdevice_RPH    = 40;
+    // Refresh time
+    specparam tdevice_REF100 = 40;
+    // Page Open Time
+    specparam tdevice_PO100 = 40;
+
 ### HyperBus
 
 The `HyperBusController` class can be used to drive and receive data from HyperRAM.
