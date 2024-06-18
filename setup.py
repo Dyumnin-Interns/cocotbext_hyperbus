@@ -1,7 +1,7 @@
 # setup.py
 from setuptools import setup, find_packages
 
-__version__="0.1.6"
+__version__="0.1.7"
 setup(
     name='cocotbext_hyperbus',
     version=__version__,

@@ -6,7 +6,7 @@
 
 Installation from pip (release version, stable):
 
-    pip install cocotbext-hyperbus
+    pip install cocotbext-uart
 
 Installation for active development:
 
@@ -34,4 +34,4 @@ To use these modules, import the one you need and connect it to the DUT:
 * `WriteReg(addr,data)`: Write _data_ into register at _addr_
 * `ReadReg(addr)`: Read from register at _addr_
 * `WriteMem(addr,data)`: Write _data_ into memory at _addr_
-* `ReadReg(count)`: Read from memory at _addr_
+* `ReadMem(addr)`: Read from memory at _addr_
