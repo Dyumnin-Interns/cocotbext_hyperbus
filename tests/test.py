@@ -17,12 +17,15 @@ async def sample_test(dut):
     Rx = await hbc.ReadReg(2049)
     print(Rx)
 
-    await hbc.WriteMem(16,0xDEADBEEF)
-    await hbc.WriteMem(0x13,0x1A2B3C4D)
-    Rx = await hbc.ReadMem(16)
-    print(Rx)
+    # Writing random data into memory
+    data_count=16
+    w_data=hbc.generate_random_data(data_count)
+    w_addr=0x4
+    await hbc.WriteMem(w_addr,w_data)
+    
+    # Reading from the memory
+    r_addr=w_addr
+    r_data = await hbc.ReadMem(r_addr,data_count)
 
-    Rx = await hbc.ReadMem(0x13)
-    print(Rx)
-    # await hbc.wait_100ns(dut)
+    assert w_data==r_data, f'Read-write test failed'
     

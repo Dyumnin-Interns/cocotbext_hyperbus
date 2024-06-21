@@ -19,7 +19,7 @@ class HyperBusController(HyperBus_FSM):
         cocotb.start_soon(self.Assign(dut))
         cocotb.start_soon(self.fsm(dut))
         cocotb.start_soon(self.is_rwdsvalid())
-        # cocotb.start_soon(self.ca_drive(dut)) 
+        # cocotb.start_soon(self.ca_drive(dut))
 
 
     async def Reset(self,dut):
@@ -61,38 +61,47 @@ class HyperBusController(HyperBus_FSM):
         # return self.rx_data(self.mem_rdata,16)
     
     async def WriteMem(self,addr,data):
-        print("--------------------------------------------------")
-        self.log("Writing into memory...")
-        self.i_cfg_access=0
-        self.i_mem_wdata=self.swap_halves(data)
-        self.i_mem_addr=addr
-        self.i_mem_valid=1
-        self.i_mem_wstrb=15
-        await Timer(10,'ns')
-        self.i_mem_valid=0
+        w_addr=addr
+        for w_data in data:
+            print("--------------------------------------------------")
+            self.log("Writing into memory...")
+            self.i_cfg_access=0
+            self.i_mem_wdata=self.swap_halves(w_data)
+            self.i_mem_addr=w_addr
+            self.i_mem_valid=1
+            self.i_mem_wstrb=15
+            await Timer(10,'ns')
+            self.i_mem_valid=0
 
-        await self.wait_until_mem_ready()
-        self.log('Write operation complete.')
-        self.log(f'Address: {hex(addr)}   Data: {hex(data)}')
-        print("--------------------------------------------------")
-        await Timer(20,'ns')
+            await self.wait_until_mem_ready()
+            self.log('Write operation complete.')
+            self.log(f'Address: {hex(w_addr)}   Data: {hex(w_data)}')
+            print("--------------------------------------------------")
+            await Timer(20,'ns')
+            w_addr+=2
 
-    async def ReadMem(self,addr):
-        print("--------------------------------------------------")
-        self.log("Reading from memory...")
-        self.i_cfg_access=0
-        self.i_mem_wstrb=0
-        self.i_mem_addr=addr
-        self.i_mem_valid=1
-        await Timer(10,'ns')
-        self.i_mem_valid=0
-        await self.wait_until_mem_ready()
-        self.log('Read operation complete.')
-        self.log(f'Address: {hex(addr)}   Data: {hex(self.o_mem_rdata)}')
-        print("--------------------------------------------------")    
-        # self.log(f'$$$$$$$$ o_mem_rdata {self.rx_data(self.o_mem_rdata,32)}')
-        await Timer(20,'ns')
-        return self.o_mem_rdata
+
+    async def ReadMem(self,addr,count):
+        r_addr=addr
+        r_data=[]
+        for i in range(count):
+            print("--------------------------------------------------")
+            self.log("Reading from memory...")
+            self.i_cfg_access=0
+            self.i_mem_wstrb=0
+            self.i_mem_addr=r_addr
+            self.i_mem_valid=1
+            await Timer(10,'ns')
+            self.i_mem_valid=0
+            await self.wait_until_mem_ready()
+            r_data.append(self.o_mem_rdata)
+            self.log('Read operation complete.')
+            self.log(f'Address: {hex(r_addr)}   Data: {hex(self.o_mem_rdata)}')
+            print("--------------------------------------------------")    
+            # self.log(f'$$$$$$$$ o_mem_rdata {self.rx_data(self.o_mem_rdata,32)}')
+            await Timer(20,'ns')
+            r_addr+=2
+        return r_data
 
     async def clk_cycle(self,dut):
         while True:

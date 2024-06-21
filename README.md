@@ -49,5 +49,6 @@ To use these modules, import the one you need and connect it to the DUT:
 * `Reset(dut)`: Reset the _dut_
 * `WriteReg(addr,data)`: Write _data_ into register at _addr_
 * `ReadReg(addr)`: Read from register at _addr_
+* `generate_random_data(len)`: Generate random 32-bit data of _len_ length
 * `WriteMem(addr,data)`: Write _data_ into memory at _addr_
-* `ReadMem(addr)`: Read from memory at _addr_
+* `ReadMem(addr,len)`: Read _len_ 32-bit data from memory starting from _addr_

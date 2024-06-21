@@ -1,6 +1,7 @@
 from cocotb.binary import BinaryValue
 from cocotb.triggers import Timer
 import cocotb
+import random
 from cocotb.utils import get_sim_time
 class HyperBus_FSM:
     # FSM States
@@ -203,6 +204,14 @@ class HyperBus_FSM:
         swapped_hex_num = int(swapped_hex_str, 16)
         
         return swapped_hex_num
+    
+    def generate_random_data(self,num):
+        int_list = []
+        for _ in range(num):
+            # Generate a random integer within the specified range
+            random_int = random.randint(0, 2**32 - 1)
+            int_list.append(random_int)
+        return int_list
 
 
 
