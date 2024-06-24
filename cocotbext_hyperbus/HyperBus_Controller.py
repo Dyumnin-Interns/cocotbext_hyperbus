@@ -151,7 +151,7 @@ class HyperBusController(HyperBus_FSM):
             dut.resetneg.value=(self.o_resetn)
             self.monitor_dq(dut)
             self.i_rwds=dut.rwds.value
-            dut.i_clk.value=self.o_mem_ready
+            
 
             
             await Timer(1,'ns')

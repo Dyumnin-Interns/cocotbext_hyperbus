@@ -13,7 +13,6 @@ module HyperRAM_wrapper(
     csneg    ,
     ck       ,
     resetneg ,
-    i_clk   
 );
 
 inout  dq7;
@@ -25,7 +24,6 @@ inout  dq2;
 inout  dq1;
 inout  dq0;
 inout  rwds;
-input i_clk;
 input  csneg;
 input  ck;
 input  resetneg;
