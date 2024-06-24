@@ -9,7 +9,6 @@ module HyperRAM_wrapper(
     dq1      ,
     dq0      ,
     rwds     ,
-
     csneg    ,
     ck       ,
     resetneg ,

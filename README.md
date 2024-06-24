@@ -19,8 +19,9 @@ See the `tests` directory for complete testbenches using these modules.
 
 ### Configuration
 
-1. Change the following parameter from the RTL code of Infineon's HyperRAM else the cocotb will have to wait for long duration and simulation may gets crash.
+1. Alter the following parameter in the Infineon HyperRAM RTL code to avoid the cocotb having to wait a long time and the simulation crashing.
 
+    ```
     // tdevice values: values for internal delays
     // power-on reset
     specparam tdevice_VCS    = 150;
@@ -34,6 +35,8 @@ See the `tests` directory for complete testbenches using these modules.
     specparam tdevice_REF100 = 40;
     // Page Open Time
     specparam tdevice_PO100 = 40;
+    ```
+
 2. Make a wrapper module for better experience and make sure to use signal names in lowercase in wrapper module as shown in [`test/wrapper_ram.v`](https://github.com/meeeeet/cocotbext_hyperbus/blob/main/tests/wrapper_ram.v).
 
 ### HyperBus
