@@ -3,7 +3,7 @@ requires= ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [project]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 name = "cocotbext-hyperbus"
 description = "COCOTB VIP for hyperbus protocol"
 package-dir = "src"
