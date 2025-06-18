@@ -62,7 +62,7 @@ class HyperBusController(HyperBus_FSM):
         await Timer(20, "ns")
         # return self.rx_data(self.mem_rdata,16)
 
-    async def WriteMem(self, addr: int, data: int) -> None:
+    async def WriteMem(self, addr: int, data: bytes) -> None:
         """Writes the memory content form the starting address for specified bytes of data.
 
         Each transaction is 4 bytes.
@@ -162,15 +162,15 @@ class HyperBusController(HyperBus_FSM):
         self.o_clk = self.bus_clk
         # dut.ck.value=self.o_clk
 
-    def int_to_8bit_array(self, num: int) -> Union[str, List[str]]:
+    def int_to_8bit_array(self, num: Union[int, str]) -> Union[str, List[str]]:
         """Converts Integer into a 8 bit binary string array."""
         if num in (self.highimp_1, self.highimp_8):
-            return num
-        binary_str = bin(num)[2:]
+            return str(num)
+        binary_str = bin(int(num))[2:]
         padded_binary_str = binary_str.zfill(8)
         return [str(bit) for bit in padded_binary_str]
 
-    def arr_io_dq(self, index: int, value: int) -> str:
+    def arr_io_dq(self, index: int, value: Union[int, str]) -> str:
         """Returns the bit at an index for the 8 bit array."""
         _io_dq = self.int_to_8bit_array(value)
         return _io_dq[index]
@@ -199,7 +199,7 @@ class HyperBusController(HyperBus_FSM):
         """Waits for 100ns."""
         await Timer(100, "ns")
 
-    def drive_dq(self, dut: SimHandleBase, value: int) -> None:
+    def drive_dq(self, dut: SimHandleBase, value: Union[int, str]) -> None:
         """Drives the data bus."""
         dut.dq7.value = BinaryValue(self.arr_io_dq(0, value))
         dut.dq6.value = BinaryValue(self.arr_io_dq(1, value))

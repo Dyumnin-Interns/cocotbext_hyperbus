@@ -107,6 +107,10 @@ ignore = [
 "src/*/hyperbus.py" = [
     "T201",  # Print statement
 ]
+"src/*/hbc_fsm.py" = [
+    "T201",  # Print statement
+    "S311"
+]
 "src/*/debug.py" = [
     "T201",  # Print statement
 ]

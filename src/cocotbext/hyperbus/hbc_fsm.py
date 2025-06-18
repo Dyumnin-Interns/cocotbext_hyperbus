@@ -5,7 +5,7 @@ from cocotb.handle import SimHandleBase
 import cocotb
 import random
 from cocotb.utils import get_sim_time
-from typing import List
+from typing import List, Union
 
 
 class HyperBus_FSM:
@@ -49,7 +49,7 @@ class HyperBus_FSM:
         self.i_rwds = 0
         self.o_rwds_de = 0
         self.o_resetn = 1
-        self.io_dq = 0
+        self.io_dq: Union[int, str] = 0
         self.io_rwds = 0
         self.dq_z_en = 0
         # Internal Variables
@@ -163,9 +163,7 @@ class HyperBus_FSM:
             self.o_mem_ready = self.mem_ready
             self.o_mem_rdata = self.mem_rdata
             self.io_dq = self.o_dq if self.o_dq_de else self.highimp_8
-            self.io_rwds = (
-                self.o_rwds if self.o_rwds_de else BinaryValue(self.highimp_1)
-            )
+            self.io_rwds = (self.o_rwds if self.o_rwds_de else BinaryValue(self.highimp_1))
             await Timer(10, "ns")
 
     def rwds_valid(self) -> int:
