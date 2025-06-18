@@ -118,6 +118,10 @@ ignore = [
     "INP001",  # File is part of an implicit namespace package
     "T201",  # Print statement
 ]
+"duties.py" = [
+    "PLC0415", #import` should be at the top-level of a file
+    "PT028", #Test function parameter `match` has default argument
+]
 # "tests/*.py" = [
 #     "ARG005",  # Unused lambda argument
 #     "FBT001",  # Boolean positional arg in function definition
