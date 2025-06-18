@@ -1,7 +1,6 @@
 """Development tasks."""
 
 from __future__ import annotations
-from git_changelog.cli import main as git_changelog
 
 import os
 import sys
@@ -52,6 +51,8 @@ def changelog(ctx: Context) -> None:
     Parameters:
         ctx: The context instance (passed automatically).
     """
+    from git_changelog.cli import main as git_changelog
+
     ctx.run(git_changelog, args=[[]], title="Updating changelog")
 
 
@@ -266,7 +267,7 @@ def cov(ctx: Context) -> None:
 
 
 @duty
-def test(ctx: Context, match: str) -> None:
+def test(ctx: Context, match: str = "") -> None:
     """Run the test suite.
 
     Parameters:
