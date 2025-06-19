@@ -83,6 +83,9 @@ jobs:
     - name: Install dependencies
       run: pdm install --no-editable -G ci-tests
 
+    - name: Install Icarus Verilog
+      run: sudo apt install -y --no-install-recommends iverilog
+
     - name: Run the test suite
       run: pdm run duty test
       env:
