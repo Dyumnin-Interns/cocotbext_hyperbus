@@ -265,7 +265,6 @@ def cov(ctx: Context) -> None:
     ctx.run(coverage.report(rcfile="config/coverage.ini"), capture=False)
     ctx.run(coverage.html(rcfile="config/coverage.ini"))
 
-
 @duty
 def test(ctx: Context, match: str = "") -> None:
     """Run the test suite.
@@ -278,6 +277,7 @@ def test(ctx: Context, match: str = "") -> None:
     os.environ["COVERAGE_FILE"] = f".coverage.{py_version}"
     ctx.run(
         pytest.run(
+            "--rootdir=.",
             "-n",
             "auto",
             "tests",
@@ -286,8 +286,10 @@ def test(ctx: Context, match: str = "") -> None:
             color="yes",
         ),
         title=pyprefix("Running tests"),
-        command=f"pytest -c config/pytest.ini -n auto -k{match!r} --color=yes tests",
+        command=f"pytest --rootdir=. -c config/pytest.ini -n auto -k{match!r} --color=yes tests",
     )
+
+
 
 
 @duty

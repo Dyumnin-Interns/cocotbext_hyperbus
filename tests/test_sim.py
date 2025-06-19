@@ -1,11 +1,14 @@
 """Sample test for hyperbus."""
+import os
 import cocotb
-from cocotbext_hyperbus import HyperBusController
+from cocotbext.hyperbus import HyperBusController
+import cocotb_test.simulator
+
 
 @cocotb.test()
 async def sample_test(dut):
     """Simple test for reading and writing from a starting address."""
-    hbc=HyperBusController(dut)
+    hbc = HyperBusController(dut)
 
     # hbc.Init(dut)
     await hbc.Reset(dut)
@@ -33,3 +36,19 @@ async def sample_test(dut):
         cocotb.log.info("Written and read data match exactly.")
     else:
         cocotb.log.error("Data mismatch!")
+
+def test_cocotb_sim():
+    """Needed for pytest to call cocotb-test."""
+    verilog_sources = [
+        os.path.join("tests","wrapper_ram.v"),
+        os.path.join("tests","s27kl0641.v"),
+    ]
+
+    cocotb_test.simulator.run(
+        toplevel="HyperRAM_wrapper",
+        module="tests.test_sim",
+        toplevel_lang="verilog",
+        verilog_sources=verilog_sources,
+        sim="icarus",
+        sim_build="sim_build/test",
+    )
