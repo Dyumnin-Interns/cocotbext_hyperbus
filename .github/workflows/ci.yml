@@ -85,3 +85,6 @@ jobs:
 
     - name: Run the test suite
       run: pdm run duty test
+      env:
+        PYTHONPATH: src
+
