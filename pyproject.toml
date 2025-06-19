@@ -66,6 +66,7 @@ tests = [
     "pytest-cov>=4.1",
     "pytest-randomly>=3.15",
     "pytest-xdist>=3.3",
+    "cocotb-test"
 ]
 typing = [
     "mypy>=1.5",
