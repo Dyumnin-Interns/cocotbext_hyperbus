@@ -3,6 +3,7 @@ requires= ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [project]
+dynamic = ["version"]
 requires-python = ">=3.9"
 name = "cocotbext-hyperbus"
 description = "COCOTB VIP for hyperbus protocol"
@@ -11,10 +12,9 @@ classifiers = ["Development Status :: 4 - Beta",
  "Intended Audience :: Developers",
 "Programming Language :: Python :: 3.8",
 ]
-version="2024.05.25"
 dependencies = ["cocotb"]
 authors = [{name = "Meet Sangani", email = "meet.sangani@outlook.com"}]
-maintainers = [{name = "Vijayvithal Jahagirdar", email = "jvs@dyumnin.com"}]
+maintainers = [{name = "Vijayvithal Jahagirdar", email = "jvs@dyumnin.com"},{name="HaIIucination", email="karthik22kallakuri@gmail.com"},{name="Likhit", email="www.likhit.mangena@gmail.com"}]
 [tool.pytest.ini_options]
 log_cli = true
 log_cli_level = "INFO"
