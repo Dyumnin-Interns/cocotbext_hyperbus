@@ -13,7 +13,7 @@ classifiers = ["Development Status :: 4 - Beta",
 ]
 dependencies = ["cocotb"]
 authors = [{name = "Meet Sangani", email = "meet.sangani@outlook.com"}]
-maintainers = [{name = "Vijayvithal Jahagirdar", email = "jvs@dyumnin.com"}]
+maintainers = [{name = "Vijayvithal Jahagirdar", email = "jvs@dyumnin.com"},{name="HaIIucination", email="karthik22kallakuri@gmail.com"},{name="Likhit", email="www.likhit.mangena@gmail.com"}]
 [tool.pytest.ini_options]
 log_cli = true
 log_cli_level = "INFO"
