@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [0.2.4] - 2025-06-30
+### Added
+- v0.2.4 Added __init__.py file.
 ## [0.2.3] - 2025-06-30
 ### Changed
 - v0.2.3 Datafield changed to bytes from int
