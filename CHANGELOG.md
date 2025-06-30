@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [0.2.3] - 2025-06-30
+### Changed
+- v0.2.3 Datafield changed to bytes from int
+- v0.2.3 pdm compatible flow
+- v0.2.3 pytest based test folder
+- v0.2.3 dynamic versioning
+
 ## [0.1.7] - 2024-10-27
 ### Added
 - v0.1.7 Support for Hierarchial RAL
