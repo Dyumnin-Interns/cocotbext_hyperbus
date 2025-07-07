@@ -12,16 +12,10 @@ async def sample_test(dut):
 
     # hbc.Init(dut)
     await hbc.Reset(dut)
-    rx = await hbc.ReadReg(0)
-    cocotb.log.info(rx)
-    rx = await hbc.ReadReg(2)
-    cocotb.log.info(rx)
-    # await hbc.WriteReg(2048,0xcf8f)
-    rx = await hbc.ReadReg(2048)
-    cocotb.log.info(rx)
-    rx = await hbc.ReadReg(2049)
-    cocotb.log.info(rx)
 
+    await hbc.WriteReg(0x800, (0x8f1f).to_bytes(2, "big"))
+    rx = await hbc.ReadReg(0x800)
+    cocotb.log.info(rx.hex())
     # Writing random data into memory
     data_count=16
     w_data=hbc.generate_random_data(data_count)

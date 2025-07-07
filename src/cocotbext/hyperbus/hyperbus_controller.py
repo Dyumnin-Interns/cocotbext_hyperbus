@@ -37,30 +37,37 @@ class HyperBusController(HyperBus_FSM):
         await Timer(160, "ns")
         self.log("RAM IS READY!!!!!!")
 
-    async def ReadReg(self, addr: int) -> str:
-        """Reads from a register based on the address."""
-        self.i_cfg_access = 1
-        self.i_mem_valid = 1
-        self.i_mem_wstrb = 0
-        self.i_mem_addr = addr
-        await Timer(10, "ns")
-        self.i_mem_valid = 0
-        await self.wait_until_mem_ready()
-        await Timer(20, "ns")
-        return self.rx_data(self.mem_rdata, 16)
+    async def ReadReg(self, addr: int) -> bytes:
+            """Reads from a register based on the address, returns 2 bytes."""
+            self.i_cfg_access = 1
+            self.i_mem_valid = 1
+            self.i_mem_wstrb = 0
+            self.i_mem_addr = addr
+            await Timer(10, "ns")
+            self.i_mem_valid = 0
+            await self.wait_until_mem_ready()
+            await Timer(20, "ns")
 
-    async def WriteReg(self, addr: int, data: int) -> None:
-        """Writes to a register based on the address."""
+            reg_value = self.mem_rdata & 0xFFFF  # Directly use as int
+            return reg_value.to_bytes(2, byteorder="big")  # or 'little' if system is little-endian
+
+    async def WriteReg(self, addr: int, data: bytes) -> None:
+        """Writes 2 bytes to a register based on the address."""
+        expected_bytes = 2
+        if len(data) != expected_bytes:
+            raise ValueError("WriteReg expects exactly 2 bytes.")
+
+        int_data = int.from_bytes(data, byteorder="big")  # or 'little' if required
         self.i_cfg_access = 1
-        self.i_mem_wdata = self.swap_halves(data)
+        self.i_mem_wdata = self.swap_halves(int_data)
         self.i_mem_addr = addr
         self.i_mem_valid = 1
-        self.i_mem_wstrb = 15
+        self.i_mem_wstrb = 0xF
         await Timer(10, "ns")
         self.i_mem_valid = 0
         await self.wait_until_mem_ready()
         await Timer(20, "ns")
-        # return self.rx_data(self.mem_rdata,16)
+
 
     async def WriteMem(self, addr: int, data: bytes) -> None:
         """Writes the memory content form the starting address for specified bytes of data.
