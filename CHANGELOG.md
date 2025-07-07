@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 
+## [0.2.5] - 2025-07-07
+
+### Added
+- v0.2.5 Added Init File
+
+### Changed
+- v0.2.5 Write interface to accept bytes.
+
+### Removed
+- v0.2.5 Duplicate Github actions
+
 ## [0.2.4] - 2025-06-30
 ### Added
 - v0.2.4 Added __init__.py file.
